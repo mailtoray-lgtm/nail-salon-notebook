@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail Salon Notebook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#FDFBF7',
+              blush: '#F3E5E3',
+              champagne: '#EADACA',
+              taupe: '#D5C7BC',
+              'warm-white': '#FAF9F6',
+              'soft-brown': '#8C7A6B',
+              'dark-brown': '#4A3F35',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-cream text-dark-brown antialiased">
+    <header class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
+      <strong class="text-lg">Nail Salon Notebook</strong>
+      <a href="#contact" class="rounded-full bg-dark-brown px-5 py-2.5 text-sm font-bold text-cream">Request a Demo</a>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-5 pb-10">
+      <section class="grid gap-10 py-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-16">
+        <div>
+          <p class="mb-5 inline-flex rounded-full border border-champagne bg-white px-4 py-2 text-sm font-bold text-soft-brown shadow-sm">In-store salon notebook app</p>
+          <h1 class="max-w-3xl text-5xl font-extrabold leading-tight md:text-6xl">A Better Appointment Notebook for Nail Salons</h1>
+          <p class="mt-6 max-w-xl text-xl leading-8 text-soft-brown">Drag-and-drop scheduling for walk-ins, appointments, technicians, rotation, resources, and daily salon work.</p>
+          <p class="mt-4 font-bold">Simple enough for the front desk. Strong enough for the owner.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#contact" class="rounded-full bg-dark-brown px-7 py-4 text-center font-bold text-cream shadow-xl shadow-soft-brown/25">Request a Demo</a>
+            <a href="#features" class="rounded-full border border-champagne bg-white px-7 py-4 text-center font-bold shadow-sm">See Features</a>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-champagne bg-white p-3 shadow-2xl shadow-soft-brown/15">
+          <div class="overflow-hidden rounded-[1.45rem] border border-taupe/60 bg-warm-white">
+            <div class="flex flex-col gap-3 border-b border-taupe/40 bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="text-xs font-bold uppercase text-soft-brown">Nail Salon Notebook</p>
+                <h2 class="text-xl font-bold">Today Schedule</h2>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-soft-brown px-3 py-2 text-xs font-bold text-cream">Walk-In Welcome</span>
+                <span class="rounded-full bg-champagne px-3 py-2 text-xs font-bold">Next in Rotation</span>
+              </div>
+            </div>
+            <div class="relative overflow-x-auto">
+              <div class="grid min-w-[760px] grid-cols-[64px_repeat(5,1fr)]">
+                <div class="border-r border-taupe/40 bg-white"></div>
+                <div class="border-r border-taupe/35 bg-white py-3 text-center text-sm font-bold">Amy</div>
+                <div class="border-r border-taupe/35 bg-white py-3 text-center text-sm font-bold">Jenny</div>
+                <div class="border-r border-taupe/35 bg-white py-3 text-center text-sm font-bold">Lily</div>
+                <div class="border-r border-taupe/35 bg-white py-3 text-center text-sm font-bold">May</div>
+                <div class="bg-white py-3 text-center text-sm font-bold">Tina</div>
+
+                <div class="bg-white text-right text-xs font-semibold text-soft-brown">
+                  <div class="h-20 border-r border-taupe/40 pr-2 pt-2">9 AM</div>
+                  <div class="h-20 border-r border-taupe/40 pr-2 pt-2">10 AM</div>
+                  <div class="h-20 border-r border-taupe/40 pr-2 pt-2">11 AM</div>
+                  <div class="h-20 border-r border-taupe/40 pr-2 pt-2">12 PM</div>
+                </div>
+                <div class="relative h-80 border-r border-taupe/25 bg-[linear-gradient(to_bottom,transparent_79px,#d5c7bc44_80px)] bg-[length:100%_80px]">
+                  <div class="absolute left-2 right-2 top-[76px] h-[78px] rounded-2xl border border-taupe/50 bg-blush p-3 shadow-sm"><b>Gel Mani</b><p class="text-xs text-soft-brown">Sarah J.</p></div>
+                </div>
+                <div class="relative h-80 border-r border-taupe/25 bg-[linear-gradient(to_bottom,transparent_79px,#d5c7bc44_80px)] bg-[length:100%_80px]">
+                  <div class="absolute left-2 right-2 top-[130px] h-[104px] rounded-2xl border border-taupe/50 bg-champagne p-3 shadow-sm"><b>Acrylic Fill</b><p class="text-xs text-soft-brown">Michelle T.</p></div>
+                </div>
+                <div class="relative h-80 border-r border-taupe/25 bg-[linear-gradient(to_bottom,transparent_79px,#d5c7bc44_80px)] bg-[length:100%_80px]">
+                  <div class="absolute left-2 right-2 top-[88px] h-[90px] rounded-2xl border border-taupe/50 bg-white p-3 shadow-sm"><b>Dip Powder</b><p class="text-xs text-soft-brown">Emily R.</p></div>
+                </div>
+                <div class="relative h-80 border-r border-taupe/25 bg-[linear-gradient(to_bottom,transparent_79px,#d5c7bc44_80px)] bg-[length:100%_80px]">
+                  <div class="absolute left-2 right-2 top-[190px] h-[88px] rounded-2xl border border-taupe/50 bg-blush p-3 shadow-sm"><b>Pedicure + Art</b><p class="text-xs text-soft-brown">Walk-In</p></div>
+                </div>
+                <div class="relative h-80 bg-[linear-gradient(to_bottom,transparent_79px,#d5c7bc44_80px)] bg-[length:100%_80px]">
+                  <div class="absolute left-2 right-2 top-[68px] h-[116px] rounded-2xl border border-taupe/50 bg-taupe/25 p-3 shadow-sm"><b>Full Set</b><p class="text-xs text-soft-brown">Jessica K.</p></div>
+                </div>
+              </div>
+              <div class="absolute left-[270px] top-[118px] w-48 overflow-hidden rounded-2xl border border-taupe/50 bg-white shadow-xl shadow-dark-brown/15">
+                <div class="px-4 py-3 text-sm font-bold">Move</div>
+                <div class="border-t border-taupe/25 px-4 py-3 text-sm font-bold">Modify</div>
+                <div class="border-t border-taupe/25 px-4 py-3 text-sm font-bold text-rose-700">Cancel</div>
+                <div class="border-t border-taupe/25 px-4 py-3 text-sm font-bold text-soft-brown">Complete</div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 border-t border-taupe/35 bg-white px-4 py-3 text-xs font-bold text-soft-brown">
+              <span class="rounded-full bg-blush px-3 py-2">Rotation: Amy → Jenny → Lily → May → Tina</span>
+              <span class="rounded-full bg-warm-white px-3 py-2">Resources: 2 chairs open</span>
+              <span class="rounded-full bg-warm-white px-3 py-2">Visit Builder ready</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="grid gap-4 py-8 md:grid-cols-3">
+        <article class="rounded-3xl border border-champagne bg-white p-6 shadow-lg shadow-soft-brown/10"><h2 class="text-xl font-extrabold">Replace the paper book</h2><p class="mt-3 leading-7 text-soft-brown">A tablet-friendly Floor Board your front desk can read fast: techs, times, walk-ins, resources, and today.</p></article>
+        <article class="rounded-3xl border border-champagne bg-white p-6 shadow-lg shadow-soft-brown/10"><h2 class="text-xl font-extrabold">Move appointments visually</h2><p class="mt-3 leading-7 text-soft-brown">Move appointments across time, technician rows, and service length while the schedule checks the rules.</p></article>
+        <article class="rounded-3xl border border-champagne bg-white p-6 shadow-lg shadow-soft-brown/10"><h2 class="text-xl font-extrabold">Protect the owner's schedule</h2><p class="mt-3 leading-7 text-soft-brown">Backup, restore, repair tools, and owner PIN controls help protect salon data.</p></article>
+      </section>
+
+      <section class="py-8">
+        <div class="flex flex-wrap gap-3 rounded-3xl border border-champagne bg-white p-5 shadow-sm">
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Floor Board Timeline</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Drag-and-Drop Timeline</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Walk-In Welcome</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Rotation Order</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Resource Rules</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Visit Builder</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Boss Mode</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Backup & Restore</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Customer Display</span>
+          <span class="rounded-full bg-warm-white px-4 py-2 text-sm font-bold text-soft-brown">Local-First Data</span>
+        </div>
+      </section>
+
+      <section id="contact" class="grid gap-8 py-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div><h2 class="text-3xl font-extrabold">Want to try Nail Salon Notebook?</h2><p class="mt-3 text-lg text-soft-brown">Request a demo for your salon.</p></div>
+        <form class="rounded-3xl border border-champagne bg-white p-7 shadow-xl shadow-soft-brown/10">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="text-sm font-bold text-soft-brown">Name<input class="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3"></label>
+            <label class="text-sm font-bold text-soft-brown">Salon Name<input class="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3"></label>
+            <label class="text-sm font-bold text-soft-brown">Phone<input class="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3"></label>
+            <label class="text-sm font-bold text-soft-brown">Email<input class="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3"></label>
+          </div>
+          <label class="mt-4 block text-sm font-bold text-soft-brown">Message<textarea rows="4" class="mt-2 w-full resize-none rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3"></textarea></label>
+          <button type="button" class="mt-5 rounded-full bg-dark-brown px-6 py-4 font-bold text-cream">Request a Demo</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="border-t border-champagne bg-white px-5 py-7 text-center text-sm font-bold text-soft-brown">
+      Nail Salon Notebook — local-first appointment scheduling for nail salons.
+    </footer>
+  </body>
+</html>
