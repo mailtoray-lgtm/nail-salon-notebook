@@ -140,6 +140,39 @@ function ScheduleMockup() {
 
 function App() {
   const [smsConsent, setSmsConsent] = useState(false);
+  const [demoForm, setDemoForm] = useState({ name: '', salonName: '', phone: '', email: '', message: '' });
+  const [submitState, setSubmitState] = useState('idle'); // idle | sending | success | error
+
+  const setDemoField = (key) => (event) => setDemoForm((prev) => ({ ...prev, [key]: event.target.value }));
+
+  const handleDemoSubmit = async (event) => {
+    event.preventDefault();
+    if (!smsConsent || submitState === 'sending') return;
+    setSubmitState('sending');
+    const consentRecord = {
+      ...demoForm,
+      smsConsent: true,
+      consentText:
+        'I agree to receive SMS text messages from Nail Salon Notebook at the phone number provided, related to demo scheduling and product updates. Msg & data rates may apply. Msg frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
+      consentTimestamp: new Date().toISOString(),
+      page: window.location.href,
+      userAgent: navigator.userAgent,
+    };
+    try {
+      const response = await fetch('https://nsn-demo-request.mailtoray.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(consentRecord),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const records = JSON.parse(localStorage.getItem('nsn_consent_records') || '[]');
+      records.push(consentRecord);
+      localStorage.setItem('nsn_consent_records', JSON.stringify(records));
+      setSubmitState('success');
+    } catch (err) {
+      setSubmitState('error');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-cream font-sans text-dark-brown">
@@ -240,18 +273,47 @@ function App() {
             </div>
           </div>
 
-          <form className="rounded-3xl border border-champagne bg-white p-5 shadow-xl shadow-soft-brown/10 md:p-7">
+          {submitState === 'success' ? (
+            <div className="rounded-3xl border border-champagne bg-white p-7 shadow-xl shadow-soft-brown/10">
+              <h3 className="text-2xl font-extrabold text-dark-brown">You're opted in — request received!</h3>
+              <p className="mt-4 leading-7 text-soft-brown">
+                Thank you! Your demo request was submitted and you have successfully opted in to receive SMS text
+                messages from Nail Salon Notebook at the phone number you provided. We recorded your consent on{' '}
+                {new Date().toLocaleString()}.
+              </p>
+              <p className="mt-4 leading-7 text-soft-brown">
+                Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> at any time to
+                cancel, or <strong>HELP</strong> for help. See our{' '}
+                <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a>.
+              </p>
+            </div>
+          ) : (
+          <form onSubmit={handleDemoSubmit} className="rounded-3xl border border-champagne bg-white p-5 shadow-xl shadow-soft-brown/10 md:p-7">
             <div className="grid gap-4 sm:grid-cols-2">
-              {['Name', 'Salon Name', 'Phone', 'Email'].map((field) => (
-                <label key={field} className="text-sm font-bold text-soft-brown">
-                  {field}
-                  <input className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
-                </label>
-              ))}
+              <label className="text-sm font-bold text-soft-brown">
+                Name
+                <input required value={demoForm.name} onChange={setDemoField('name')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+              </label>
+              <label className="text-sm font-bold text-soft-brown">
+                Salon Name
+                <input required value={demoForm.salonName} onChange={setDemoField('salonName')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+              </label>
+              <label className="text-sm font-bold text-soft-brown">
+                Phone
+                <input required type="tel" value={demoForm.phone} onChange={setDemoField('phone')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+                <span className="mt-2 block text-xs font-semibold leading-5 text-soft-brown">
+                  Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help.{' '}
+                  <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a>
+                </span>
+              </label>
+              <label className="text-sm font-bold text-soft-brown">
+                Email
+                <input required type="email" value={demoForm.email} onChange={setDemoField('email')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+              </label>
             </div>
             <label className="mt-4 block text-sm font-bold text-soft-brown">
               Message
-              <textarea rows="4" className="mt-2 w-full resize-none rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+              <textarea rows="4" value={demoForm.message} onChange={setDemoField('message')} className="mt-2 w-full resize-none rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
             </label>
 
             <label className="mt-5 flex items-start gap-3 rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-sm font-semibold leading-6 text-soft-brown">
@@ -271,13 +333,19 @@ function App() {
             </label>
 
             <button
-              type="button"
-              disabled={!smsConsent}
+              type="submit"
+              disabled={!smsConsent || submitState === 'sending'}
               className="mt-5 w-full rounded-full bg-dark-brown px-6 py-4 font-bold text-cream shadow-lg shadow-soft-brown/20 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
             >
-              Request a Demo
+              {submitState === 'sending' ? 'Sending…' : 'Request a Demo'}
             </button>
+            {submitState === 'error' && (
+              <p className="mt-4 text-sm font-bold text-red-700">
+                Sorry, something went wrong sending your request. Please try again, or email us at {CONTACT_EMAIL}.
+              </p>
+            )}
           </form>
+          )}
         </section>
       </main>
 

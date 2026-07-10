@@ -1,0 +1,7 @@
+name = "nsn-demo-request"
+main = "demo-request-worker.js"
+compatibility_date = "2026-07-01"
+
+[[kv_namespaces]]
+binding = "CONSENT_RECORDS"
+id = "b64cee3c3fc24ff7b1a6a54bcc2507c3"
