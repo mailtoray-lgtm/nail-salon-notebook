@@ -147,14 +147,15 @@ function App() {
 
   const handleDemoSubmit = async (event) => {
     event.preventDefault();
-    if (!smsConsent || submitState === 'sending') return;
+    if (submitState === 'sending') return;
     setSubmitState('sending');
     const consentRecord = {
       ...demoForm,
-      smsConsent: true,
-      consentText:
-        'I agree to receive SMS text messages from Nail Salon Notebook at the phone number provided, related to demo scheduling and product updates. Msg & data rates may apply. Msg frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
-      consentTimestamp: new Date().toISOString(),
+      smsConsent,
+      consentText: smsConsent
+        ? 'I agree to receive SMS text messages from Nail Salon Notebook at the phone number provided, related to demo scheduling and product updates. Msg & data rates may apply. Msg frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.'
+        : '',
+      consentTimestamp: smsConsent ? new Date().toISOString() : null,
       page: window.location.href,
       userAgent: navigator.userAgent,
     };
@@ -275,17 +276,26 @@ function App() {
 
           {submitState === 'success' ? (
             <div className="rounded-3xl border border-champagne bg-white p-7 shadow-xl shadow-soft-brown/10">
-              <h3 className="text-2xl font-extrabold text-dark-brown">You're opted in — request received!</h3>
-              <p className="mt-4 leading-7 text-soft-brown">
-                Thank you! Your demo request was submitted and you have successfully opted in to receive SMS text
-                messages from Nail Salon Notebook at the phone number you provided. We recorded your consent on{' '}
-                {new Date().toLocaleString()}.
-              </p>
-              <p className="mt-4 leading-7 text-soft-brown">
-                Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> at any time to
-                cancel, or <strong>HELP</strong> for help. See our{' '}
-                <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a>.
-              </p>
+              <h3 className="text-2xl font-extrabold text-dark-brown">Request received!</h3>
+              {smsConsent ? (
+                <>
+                  <p className="mt-4 leading-7 text-soft-brown">
+                    Thank you! Your demo request was submitted and you have opted in to receive SMS text
+                    messages from Nail Salon Notebook at the phone number you provided. We recorded your consent on{' '}
+                    {new Date().toLocaleString()}.
+                  </p>
+                  <p className="mt-4 leading-7 text-soft-brown">
+                    Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> at any time to
+                    cancel, or <strong>HELP</strong> for help. See our{' '}
+                    <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a>.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-4 leading-7 text-soft-brown">
+                  Thank you! Your demo request was submitted. You chose not to opt in to SMS messaging, so we
+                  will not text you — we'll follow up by email instead.
+                </p>
+              )}
             </div>
           ) : (
           <form onSubmit={handleDemoSubmit} className="rounded-3xl border border-champagne bg-white p-5 shadow-xl shadow-soft-brown/10 md:p-7">
@@ -299,8 +309,8 @@ function App() {
                 <input required value={demoForm.salonName} onChange={setDemoField('salonName')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
               </label>
               <label className="text-sm font-bold text-soft-brown">
-                Phone
-                <input required type="tel" value={demoForm.phone} onChange={setDemoField('phone')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
+                Phone {smsConsent ? '' : '(optional)'}
+                <input required={smsConsent} type="tel" value={demoForm.phone} onChange={setDemoField('phone')} className="mt-2 w-full rounded-2xl border border-taupe/70 bg-warm-white px-4 py-3 text-dark-brown outline-none focus:border-soft-brown" />
                 <span className="mt-2 block text-xs font-semibold leading-5 text-soft-brown">
                   Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help.{' '}
                   <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a>
@@ -324,7 +334,7 @@ function App() {
                 className="mt-1 h-4 w-4 flex-shrink-0"
               />
               <span>
-                I agree to receive SMS text messages from Nail Salon Notebook at the phone number provided, related to demo
+                <strong>(Optional)</strong> I agree to receive SMS text messages from Nail Salon Notebook at the phone number provided, related to demo
                 scheduling and product updates. Msg &amp; data rates may apply. Msg frequency varies. Reply STOP to opt out,
                 HELP for help. Consent is not a condition of purchase. See our{' '}
                 <a href="#privacy" className="underline decoration-champagne underline-offset-4">Privacy Policy</a> and{' '}
@@ -334,7 +344,7 @@ function App() {
 
             <button
               type="submit"
-              disabled={!smsConsent || submitState === 'sending'}
+              disabled={submitState === 'sending'}
               className="mt-5 w-full rounded-full bg-dark-brown px-6 py-4 font-bold text-cream shadow-lg shadow-soft-brown/20 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
             >
               {submitState === 'sending' ? 'Sending…' : 'Request a Demo'}
