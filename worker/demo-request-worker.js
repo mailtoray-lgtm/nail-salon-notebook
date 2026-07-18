@@ -2,6 +2,12 @@
 // Stores each submission in KV with server-side timestamp and client IP
 // to maintain the A2P consent audit trail.
 const ALLOWED_ORIGINS = [
+  // Primary business site (canonical = www) — /request-demo opt-in form.
+  'https://www.salonnotebook.com',
+  'https://salonnotebook.com',
+  'https://demo.salonnotebook.com',
+  'https://demo-mobile.salonnotebook.com',
+  // Legacy GitHub Pages page (now a redirect; kept during A2P transition).
   'https://mailtoray-lgtm.github.io',
   'http://localhost:4573',
   'http://localhost:5173',
